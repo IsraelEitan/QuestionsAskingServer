@@ -31,6 +31,10 @@ Principles and Style
   Clean Controller API Service: Well-structured and readable code.
   
 Running the Program
+  Important!!!
+  - Right click on project name -> Properties -> Build -> Output -> Check the "Documentation file" box
+    This is for creating an xml file for SwaggerUI.
+
   Migrations:
   
   Delete MigrationFolder.
