@@ -6,6 +6,7 @@
     using QuestionsAskingServer.Dtos;
     using QuestionsAskingServer.Exceptions;
     using QuestionsAskingServer.Models;
+    using QuestionsAskingServer.Repositories.Interfaces;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -35,6 +36,11 @@
                              .Take(parameters.PageSize.Value);
             }
             return await query.ToListAsync();
+        }
+
+        public async Task<IEnumerable<int>> GetAllQuestionsTypes()
+        {
+            return await _context.QuestionTypes.Select(qt => (int)qt.Type).ToListAsync();     
         }
 
         public async Task<Question> GetQuestionWithDetailsByIdAsync(int id)

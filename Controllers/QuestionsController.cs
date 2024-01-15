@@ -3,6 +3,7 @@
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using QuestionsAskingServer.Dtos;
+    using QuestionsAskingServer.Exceptions;
     using QuestionsAskingServer.Models;
     using QuestionsAskingServer.Services;
     using Swashbuckle.AspNetCore.Annotations;
@@ -37,7 +38,7 @@
             var questionsData = await _questionService.GetAllQuestionsAsync(parameters);
             var questionsDto = _mapper.Map<IEnumerable<QuestionDto>>(questionsData.Questions);
 
-            return Ok(new PagedResultDto<QuestionDto>
+            return Ok(new PagedResultResponse<QuestionDto>
             {
                 Data = questionsDto,
                 TotalCount = questionsData.TotalItems,
@@ -68,8 +69,16 @@
         [SwaggerOperation(Summary = "Create a new question")]
         [SwaggerResponse(201, "Successfully created the question.")]
         [SwaggerResponse(400, "Invalid request data.")]
-        public async Task<IActionResult> CreateQuestion([FromBody] CreateQuestionDto createQuestionDto)
+        public async Task<IActionResult> CreateQuestion([FromBody] CreateQuestionRequest createQuestionDto)
         {
+            // Validate the QuestionType value in the DTO
+            var validQuestionTypeIds = await _questionService.GetAllQuestionsTypes();
+
+            if (!validQuestionTypeIds.Contains(createQuestionDto.QuestionType))
+            {
+                throw new InvalidInputException("Question's type is not valid");
+            }
+
             var question = _mapper.Map<Question>(createQuestionDto);
             var createdQuestionId = await _questionService.CreateQuestionAsync(question);
             return CreatedAtAction(nameof(GetQuestionById), new { id = createdQuestionId }, createQuestionDto);

@@ -1,13 +1,14 @@
 ﻿namespace QuestionsAskingServer.Data
 {
     using Microsoft.EntityFrameworkCore;
+    using QuestionsAskingServer.Enums;
     using QuestionsAskingServer.Models;
 
     public class QASDBContext : DbContext
     {
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-
+        public DbSet<QuestionTypeEntity> QuestionTypes { get; set; }
         public QASDBContext(DbContextOptions<QASDBContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

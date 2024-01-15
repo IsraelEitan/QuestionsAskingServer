@@ -1,6 +1,6 @@
 ﻿namespace QuestionsAskingServer.Dtos
 {
-    public class PagedResultDto<T>
+    public class PagedResultResponse<T>
     {
         public IEnumerable<T> Data { get; set; }
         public int TotalCount { get; set; }

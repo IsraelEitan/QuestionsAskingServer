@@ -2,13 +2,18 @@
 {
     using AutoMapper;
     using QuestionsAskingServer.Dtos;
+    using QuestionsAskingServer.Enums;
     using QuestionsAskingServer.Models;
+    using QuestionsAskingServer.Utils;
 
     public class QASProfile : Profile
     {
         public QASProfile()
         {
-            CreateMap<CreateQuestionDto, Question>()
+            CreateMap<int, QuestionType>().ConvertUsing(source => EnumConversionUtil.ConvertIntToEnum<QuestionType>(source));
+            CreateMap<QuestionType, int>().ConvertUsing(source => (int)source);
+
+            CreateMap<CreateQuestionRequest, Question>()
             .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers))
             .ForMember(dest => dest.CorrectAnswerId, opt => opt.MapFrom(src => src.CorrectAnswerId));
 
@@ -27,7 +32,7 @@
 
             CreateMap<Answer, AnswerDto>();
 
-            CreateMap<Question, CreateQuestionDto>()
+            CreateMap<Question, CreateQuestionRequest>()
                 .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers))
                 .ForMember(dest => dest.CorrectAnswerId, opt => opt.MapFrom(src => src.CorrectAnswerId));
 

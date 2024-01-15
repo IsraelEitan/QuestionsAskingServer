@@ -44,7 +44,8 @@ namespace QuestionsAskingServer.Middlewares
             context.Response.StatusCode = exception switch
             {
 
-                EntityNotFoundException => StatusCodes.Status404NotFound,  
+                EntityNotFoundException => StatusCodes.Status404NotFound,
+                InvalidInputException => StatusCodes.Status400BadRequest,
                 _ => (int)HttpStatusCode.InternalServerError,
             };
 

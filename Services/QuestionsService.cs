@@ -3,12 +3,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using QuestionsAskingServer.Dtos;
     using QuestionsAskingServer.Models;
-    using QuestionsAskingServer.Repositories;
     using AutoMapper;
     using QuestionsAskingServer.Helpers;
     using QuestionsAskingServer.Exceptions;
+    using QuestionsAskingServer.Enums;
+    using QuestionsAskingServer.Repositories.Interfaces;
 
     public class QuestionsService : IQuestionsService
     {
@@ -32,9 +32,20 @@
                 () => _cacheService.GetOrCreateAsync(cacheKey, async () =>
                 {
                     var questions = await _unitOfWork.Questions.GetQuestionsWithDetailsAsync(parameters);
-                    return (_mapper.Map<IEnumerable<Question>>(questions), questions.Count());
+                    return ( questions, questions.Count());
                 }),
             $"retrieving all question for page {parameters.PageNumber} with page size {parameters.PageSize}");
+        }
+
+        public async Task<IEnumerable<int>> GetAllQuestionsTypes()
+        {
+            var cacheKey = $"questionsTypes_all";
+            return await ExecuteWithLoggingAndReturnValueAsync(
+                () => _cacheService.GetOrCreateAsync(cacheKey, async () =>
+                {
+                    return await _unitOfWork.Questions.GetAllQuestionsTypes();        
+                }),
+            $"retrieving all questions types");
         }
 
         public async Task<Question> GetQuestionByIdAsync(int id)
@@ -56,6 +67,8 @@
         public async Task<int> CreateQuestionAsync(Question newQuestion)
         {
             
+
+
             var question = _mapper.Map<Question>(newQuestion);
 
             await ExecuteWithLoggingAsync(async () =>
@@ -109,7 +122,7 @@
                 throw new EntityNotFoundException($"Answer with ID {answerId} not found in question with ID {questionId}.");
             }
 
-            bool isCorrect = question.QuestionType == "Trivia" && answer.Id == question.CorrectAnswerId;
+            bool isCorrect = question.QuestionTypeId == QuestionType.Trivia && answer.Id == question.CorrectAnswerId;
        
             answer.Votes += 1;
 

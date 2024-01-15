@@ -2,7 +2,7 @@
 using QuestionsAskingServer.Data;
 using QuestionsAskingServer.Exceptions;
 
-namespace QuestionsAskingServer.Repositories
+namespace QuestionsAskingServer.Repositories.Interfaces
 {
     public class BaseRepository<T> : IGenericRepository<T> where T : class
     {
@@ -12,7 +12,7 @@ namespace QuestionsAskingServer.Repositories
         public BaseRepository(QASDBContext context, ILogger<BaseRepository<T>> logger)
         {
             _context = context;
-            _logger = logger; 
+            _logger = logger;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

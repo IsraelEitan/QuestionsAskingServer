@@ -2,6 +2,7 @@
 {
     using Microsoft.Extensions.Logging;
     using QuestionsAskingServer.Data;
+    using QuestionsAskingServer.Repositories.Interfaces;
     using System;
     using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@
         private readonly ILogger<QuestionsUnitOfWork> _logger;
         private readonly ILoggerFactory _loggerFactory;
         private IQuestionRepository _questions;
-
+      
         public QuestionsUnitOfWork(QASDBContext context, ILogger<QuestionsUnitOfWork> logger, ILoggerFactory loggerFactory)
         {
             _context = context;
@@ -20,7 +21,7 @@
         }
 
         public IQuestionRepository Questions => _questions ??= new QuestionsRepository(_context, _loggerFactory.CreateLogger<QuestionsRepository>());
-
+        
         public async Task CompleteAsync()
         {
             try

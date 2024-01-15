@@ -9,6 +9,7 @@ using QuestionsAskingServer.Validators;
 using QuestionsAskingServer.Repositories;
 using QuestionsAskingServer.Services;
 using QuestionsAskingServer.Helpers;
+using QuestionsAskingServer.Repositories.Interfaces;
 
 namespace QuestionsAskingServer.Extensions
 {
@@ -17,7 +18,7 @@ namespace QuestionsAskingServer.Extensions
         public static void AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IQuestionsService, QuestionsService>();
-            services.AddScoped<ICacheService, QuestionsCacheService>();
+            services.AddScoped<ICacheService, QASCacheService>();
             services.AddScoped<IUnitOfWork, QuestionsUnitOfWork>();
             services.AddScoped<IQuestionRepository, QuestionsRepository>();
 

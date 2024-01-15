@@ -1,4 +1,4 @@
-﻿namespace QuestionsAskingServer.Repositories
+﻿namespace QuestionsAskingServer.Repositories.Interfaces
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

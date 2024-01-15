@@ -17,12 +17,26 @@ namespace QuestionsAskingServer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuestionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuestionTypeId = table.Column<int>(type: "int", nullable: false),
                     CorrectAnswerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuestionTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QuestionTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,6 +71,9 @@ namespace QuestionsAskingServer.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Answers");
+
+            migrationBuilder.DropTable(
+                name: "QuestionTypes");
 
             migrationBuilder.DropTable(
                 name: "Questions");

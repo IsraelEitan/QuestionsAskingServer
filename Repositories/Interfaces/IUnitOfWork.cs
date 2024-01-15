@@ -1,4 +1,4 @@
-﻿namespace QuestionsAskingServer.Repositories
+﻿namespace QuestionsAskingServer.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {

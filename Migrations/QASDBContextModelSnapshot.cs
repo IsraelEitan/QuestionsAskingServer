@@ -58,9 +58,8 @@ namespace QuestionsAskingServer.Migrations
                     b.Property<int?>("CorrectAnswerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("QuestionType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("QuestionTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -69,6 +68,26 @@ namespace QuestionsAskingServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Questions", (string)null);
+                });
+
+            modelBuilder.Entity("QuestionsAskingServer.Models.QuestionTypeEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionTypes");
                 });
 
             modelBuilder.Entity("QuestionsAskingServer.Models.Answer", b =>

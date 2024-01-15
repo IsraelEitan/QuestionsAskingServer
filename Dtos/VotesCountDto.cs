@@ -1,6 +1,6 @@
 ﻿namespace QuestionsAskingServer.Dtos
 {
-    public class VotesCountDto
+    public record VotesCountDto
     {
         public int VotesCount { get; set; }
         public bool IsCorrect { get; set; }
