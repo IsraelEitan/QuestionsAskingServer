@@ -31,13 +31,20 @@ Principles and Style
   Clean Controller API Service: Well-structured and readable code.
   
 Running the Program
-  Migrations
-  To apply the initial database migration, use the following command:
-
-In shell / Package Manager Console
+  Migrations:
+  
+  Delete MigrationFolder.
+  Open Package Manager Console and run:
+                                        Add-Migration InitialCreate
+                                        Update-Database
+                                        
+  OR DONT Remove the Migration folder and apply the initial database migration, use the following command:
+  In shell
   Copy this code:
-    dotnet ef migrations add 20240114140601_InitialCreate
-    dotnet ef database update
+                  dotnet ef migrations add 20240115094752_InitialCreate
+                  dotnet ef database update
+
+regardless there is a migration logic inside the program.cs
 
 Starting the Server
   run the program
