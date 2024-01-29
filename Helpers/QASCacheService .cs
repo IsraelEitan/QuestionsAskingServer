@@ -2,6 +2,7 @@
 
 namespace QuestionsAskingServer.Helpers
 {
+    //Cache Service
     public class QASCacheService : ICacheService
     {
         private readonly IMemoryCache _memoryCache;
