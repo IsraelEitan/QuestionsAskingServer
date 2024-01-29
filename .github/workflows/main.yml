@@ -1,4 +1,4 @@
-name: Publish 
+name: Publish
 
 on:
   workflow_dispatch:
@@ -21,9 +21,7 @@ jobs:
         run: dotnet restore ./QuestionsAskingServer.sln
 
       - name: Build
-        run: dotnet build ./QuestionsAskingServer.sln --configuration Relese --no-restore
+        run: dotnet build ./QuestionsAskingServer.sln --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish ./QuestionsAskingServer.sln --configuration Relese --no-build
-
-      
+        run: dotnet publish ./QuestionsAskingServer.sln --configuration Release --no-build
