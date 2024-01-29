@@ -84,7 +84,7 @@
 
        public async Task UpdateQuestionAsync(int id, Question question)
         {
-            ValidateQuestionUpdate(id, question);
+            await ValidateQuestionUpdate(id, question);
 
             await ExecuteWithLoggingAsync(async () =>
             {

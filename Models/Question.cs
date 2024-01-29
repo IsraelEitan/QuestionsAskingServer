@@ -6,7 +6,7 @@ namespace QuestionsAskingServer.Models
     public class Question
     {
         public int Id { get; set; }
-        public string Text { get; set; }
+        public string Text { get; set; } = null!;
         public QuestionType QuestionTypeId { get; set; } 
         public int? CorrectAnswerId { get; set; }
         public List<Answer> Answers { get; set; } = new List<Answer>();

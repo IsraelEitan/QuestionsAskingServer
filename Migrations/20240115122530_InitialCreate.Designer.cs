@@ -12,7 +12,7 @@ using QuestionsAskingServer.Data;
 namespace QuestionsAskingServer.Migrations
 {
     [DbContext(typeof(QASDBContext))]
-    [Migration("20240115094752_InitialCreate")]
+    [Migration("20240115122530_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

@@ -6,6 +6,6 @@ namespace QuestionsAskingServer.Models
     {
         public int Id { get; set; }
         public QuestionType Type { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
     }
 }

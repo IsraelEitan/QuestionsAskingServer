@@ -11,7 +11,7 @@
         private readonly QASDBContext _context;
         private readonly ILogger<QuestionsUnitOfWork> _logger;
         private readonly ILoggerFactory _loggerFactory;
-        private IQuestionRepository _questions;
+        private IQuestionRepository? _questions;
       
         public QuestionsUnitOfWork(QASDBContext context, ILogger<QuestionsUnitOfWork> logger, ILoggerFactory loggerFactory)
         {
